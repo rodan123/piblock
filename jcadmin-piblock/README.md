@@ -11,4 +11,6 @@ This is a fork of the jcadmin project by Don Cross (https://github.com/cosinekit
 2) Added an "Internet" icon to tag entries that were matched on 800notes.com. Modified the "neutral" icon to not 
    be a blank icon.	
 
+3) Added two screenshots to show the modified app home screen.
+
   
