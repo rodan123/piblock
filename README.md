@@ -31,8 +31,8 @@ I run this project, piblock, on a raspberrypi3 using an iphone4 as a ssh termina
    client. (https://itunes.apple.com/us/app/reflection-for-unix-ssh-client/id920472514?mt=8ht) 
    Copy to your home directory and edit the program paths within as necessary.  
 
-8) Added softlink of 800notes.txt to 800notes.html, do that last matched caller internet data can be viewed
-   locally. I installed lynx on my raspberrypi to locally view the file over an SSH connection. 
+8) Added softlink of 800notes.txt to 800notes.html, so that last matched caller internet data can be viewed
+   locally. I installed lynx on the raspberrypi3 to locally view the file over an SSH connection. 
 
 
    
