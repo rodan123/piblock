@@ -3,7 +3,7 @@ Fork of the jcblock junk call blocker to add features and changes that may be us
 
 This is a fork of the jcblock project by Walter S. Heath (http://jcblock.sourceforge.net/jcblock.html)
 
-I run piblock on a raspberrypi3 using an dedicated iphone4, running the Reflection SSH client. 
+I run piblock on a raspberrypi3 using an dedicated iphone4, running the Reflection SSH client, 
 (https://itunes.apple.com/us/app/reflection-for-unix-ssh-client/id920472514?mt=8ht), as a ssh terminal and display.
 
 07/01/16 - Initial commit
