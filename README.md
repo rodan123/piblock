@@ -28,7 +28,7 @@ I run piblock on a raspberrypi3 using an dedicated iphone4, running the Reflecti
    added "I" (Internet match) and "M" (Missed/VMail)
 
 6) Added fork of the jcadmin program by Don Cross (https://github.com/cosinekitty/jcadmin) modified to work with 
-   piblock's handling of callerID rotation and tag additions.
+   piblock's handling of callerID log rotation and tag additions.
 
 7) Created a runpiblock.sh script to startup jcadmin and piblock. 
    Copy to your home directory and edit the program paths within as necessary.  
