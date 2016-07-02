@@ -33,7 +33,7 @@ I run piblock on a raspberrypi3 using an dedicated iphone4, running the Reflecti
 7) Created a runpiblock.sh script to startup jcadmin and piblock. 
    Copy to your home directory and edit the program paths within as necessary.  
 
-8) Added softlink of 800notes.txt to 800notes.html, so that the last matched caller internet data can easily 
+8) Added softlink of 800notes.txt to 800notes.html, so that the last matched caller's internet data can easily 
    be viewed locally. I installed lynx on the raspberrypi3 to view the file over a SSH connection. 
 
 
