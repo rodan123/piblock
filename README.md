@@ -3,7 +3,8 @@ Fork of the jcblock junk call blocker to add features and changes that may be us
 
 This is a fork of the jcblock project by Walter S. Heath (http://jcblock.sourceforge.net/jcblock.html)
 
-I run piblock on a raspberrypi3 using an iphone4 as a ssh terminal and display.
+I run piblock on a raspberrypi3 using an dedicated iphone4, running the Reflection SSH client. 
+(https://itunes.apple.com/us/app/reflection-for-unix-ssh-client/id920472514?mt=8ht), as a ssh terminal and display.
 
 07/01/16 - Initial commit
 
@@ -24,13 +25,12 @@ I run piblock on a raspberrypi3 using an iphone4 as a ssh terminal and display.
    Copy the repo's logroate.d/piblock file to /etc/logrotate.d/piblock and edit the path to callerID.dat within.
    
 5) Added two new callerID.dat flags, in addition to "W" (whitelist) "B" (blacklist) and "-" (Answered), 
-   added "I" (Internet match) and "M" (Missed)
+   added "I" (Internet match) and "M" (Missed/VMail)
 
 6) Added fork of the jcadmin program by Don Cross (https://github.com/cosinekitty/jcadmin) modified to work with 
    piblock's handling of callerID rotation and tag additions.
 
-7) Created runpiblock script to startup jcadmin and piblock on dedicated iPhone4 running the Reflection SSH
-   client. (https://itunes.apple.com/us/app/reflection-for-unix-ssh-client/id920472514?mt=8ht) 
+7) Created a runpiblock.sh script to startup jcadmin and piblock. 
    Copy to your home directory and edit the program paths within as necessary.  
 
 8) Added softlink of 800notes.txt to 800notes.html, so that last matched caller internet data can be viewed
