@@ -1,5 +1,5 @@
 #!/bin/sh
-cd ~/jcadmin
+cd ~/jcadmin-piblock
 node jcadmin.js 9292 /home/pi/piblock/ >> jcadmin.log &
 clear
 cd ~/piblock
