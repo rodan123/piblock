@@ -24,6 +24,6 @@ I run this project, piblock, on a raspberrypi3 using an iphone4 as a ssh termina
 
 7) Created runpiblock script to startup jcadmin and piblock on dedicated iPhone4 running the Reflection SSH
    client. (https://itunes.apple.com/us/app/reflection-for-unix-ssh-client/id920472514?mt=8ht) 
-   Edit program paths within as necessary.  
+   Copy to your home directory and edit the program paths within as necessary.  
 
    
