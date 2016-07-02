@@ -17,7 +17,13 @@ I run this project, piblock, on a raspberrypi3 using an iphone4 as a ssh termina
    handle callerID logs. Logrotate then retains callerID logs for one year, rotates monthly, and archived logs are labeled by month.
    Example: callerID.dat.06 is the archived log from June past. Copy the repo's logroate.d/piblock file to /etc/logrotate.d/piblock and edit the path to calledID.dat within.
    
-5) Added two new callerID.dat flags, in addition to W (whitelist) B (blacklist) and - (Answered), added I (Internet match) and 
-   M (Missed)
+5) Added two new callerID.dat flags, in addition to W (whitelist) B (blacklist) and - (Answered), added I (Internet match) and M (Missed)
+
+6) Added fork of the jcadmin program by Don Cross (https://github.com/cosinekitty/jcadmin) modified to work with 
+   piblock's handling of callerID rotation and tag additions.
+
+7) Created runpiblock script to startup jcadmin and piblock on dedicated iPhone4 running the Reflection SSH
+   client. (https://itunes.apple.com/us/app/reflection-for-unix-ssh-client/id920472514?mt=8ht) 
+   Edit program paths within as necessary.  
 
    

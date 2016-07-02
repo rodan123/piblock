@@ -1,0 +1,105 @@
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th {
+    background: #333;
+    color: white;
+    font-weight: bold;
+}
+
+td, th {
+    padding: 6px;
+    border: 1px solid #ccc;
+    text-align: left;
+}
+
+.SafeCall {
+    background: #bfb;
+}
+
+.BlockedCall {
+    background: #fbb;
+}
+
+.NeutralCall {
+    background: #eee;
+}
+
+.NavButton {
+    font-size: x-large;
+    font-family: sans-serif;
+    color: blue;
+}
+
+.RightButton {
+    float: right;
+}
+
+.SettingsTitle {
+    font-size: large;
+    font-family: sans-serif;
+    color: green;
+}
+
+.SettingsButton {
+    font-size: large;
+    font-family: sans-serif;
+    color: green;
+    border-style: solid;
+    border-width: 8px;
+    border-color: transparent;
+}
+
+.NavSection {
+    border-style: solid;
+    border-width: 10px;
+    border-color: transparent;
+}
+
+.TargetTable {
+    font-size: x-large;
+    font-family: monospace;
+}
+
+.CurrentDateTime {
+    font-size: large;
+    color: blue;
+    text-align: center;
+    font-family: monospace;
+}
+
+.EditBox {
+    font-size: 18px;
+}
+
+.IconColumn {
+    width: 24px;
+    height: 38px;
+    background: white;
+    border: 0;
+    padding: 0;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.WhenCell {
+    white-space: nowrap;
+}
+
+.CallerColumn {
+    width: 100%;
+}
+
+.CallCountColumn {
+    text-align: right;
+}
+
+.HistoryColumn {
+    text-align: center;
+}
+
+.LostContact {
+    text-align: center;
+}
