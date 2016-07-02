@@ -10,7 +10,7 @@ I run piblock on a raspberrypi3 using an dedicated iphone4, running the Reflecti
 
 1) Added text output formated to iphone ssh screen to display program status and call handling information.
 
-2) Added code to perform an additional check. Upon recieving a call from a number that is not already on either 
+2) Added code to perform an additional check. Upon receiving a call from a number that is not already on either 
    the whitelist or the blacklist, the program checks to see if the number has been reported at 800notes.com. 
    The program is brutal, if the number has been reported, it terminates the call and adds the caller's name
    to the blacklist.
