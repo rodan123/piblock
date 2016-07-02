@@ -1,0 +1,9 @@
+/home/pi/piblock/callerID.dat { 
+        monthly
+	nocompress
+        rotate 12
+        missingok
+	dateext
+	dateformat .%m
+	dateyesterday
+}

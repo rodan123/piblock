@@ -1,0 +1,52 @@
+# The first field is the one tested. It can be the telephone
+# number or some other field in the caller ID string. It *must
+# be* terminated with a '?' character. The Date-of-last-block
+# field starts in the 20th column. Be sure to replace the
+# '------' (shown in the examples below) with the current date
+# in format MMDDYY so that room to store the date is present
+# on the line. Or you may enter '++++++' if you want the entry
+# to stay on the list permanently. The rest of the line (out
+# to 80 chars) can contain a comment of your choosing.
+# ******Do not use tabs in the entries!*********
+# Examples (without the initial '#' chars!):
+#8005551212?        ------         JUNK CALL
+#Cell Phone?        ------         (A cell phone call)
+#                  | <---- the 20th column
+#Tested field:     Date field:   Comment field:
+Cell Phone   CA?   010110        ALL CA CELL PHONES
+Paging Phone?      102110        Junk calls
+PAGING PHONE?      010110        JUNK CALLS
+MARKETING?         080110        JUNK CALLS
+#UNAVAILABLE?       010110        POLITICAL CALLS
+FRIENDS OF?        010110        POLICICAL CALLS
+CHOICE?            081410        POLITICAL CALLS
+3 MOS FREE?        092510        JUNK CALL
+800 Service?       ++++++        PERMANENTLY BLOCKED
+RELIEFLINC?        010110        CREDIT SCAM
+CREDIT?            052710        CREDIT SCAM
+DEBT?              071510        JUNK CALL
+AUTO WARRANTY?     020510        JUNK CALL
+LOWER RATES?       112610        JUNK CALL
+SERVICE?           022410        MORTAGE JUNK CALL
+SALES?             081410        SALES DEPOT
+SENIOR HELPDESK?   012610        JUNK CALL
+FINANCE STARS?     011910        JUNK CALL
+AUTO WARRANTY?     012810        JUNK CALL
+BUSINESS CENTER?   022010        JUNK CALL
+CORE CONTACT?      022210        JUNK CALL
+POLLING?           040110        JUNK CALL
+FIXIN DEBTS?       041610        JUNK CALL
+FIX LOAN?          042310        JUNK CALL
+LOAN MAXMIZE?      042510        JUNK CALL
+INSUR SAV?         043010        JUNK CALL
+FINNCL IMPRV?      043010        JUNK CALL
+MONEY SOLUTIONS?   050110        JUNK CALL
+CONSUMER SUPPOR?   050710        JUNK CALL
+LOAN MOD SERV?     050810        JUNK CALL
+TELEMARKETER?      051210        JUNK CALL
+HELP?              051210        JUNK CALL
+ASSOC          ?   080410        JUNK CALL
+NMBR = 91313?      081910        BAD NUMBER
+Washington   DC?   020310        JUNK CALL
+MORTAGE SPECIA?    031510        JUNK CALL
+NMBR = 809?        032510        BAD AREA CODE

@@ -1,0 +1,15 @@
+# The first field is the one tested. It can be the telephone number or some other
+# field in the caller ID string. It *must be* terminated with a '?' character.
+# The Date-of-last-accept field starts in the 20th column. Be sure to replace the
+# '------' characters (shown in the examples below) with the current date in
+# format MMDDYY so that room to store the date is present on the line. The rest
+# of the line (out to 80 chars) can contain a comment of your choosing. Any
+# change you make will be recognized by a running jcblock program.
+# ******Do not use tabs in the entries!!******
+# Examples (without the initial '#' chars!):
+#8005551212?        ------         your best friend's home number
+#5081232121?        ------         your best friend's cell phone number
+#                  | <---- the 20th column
+#Tested field:     Date field:   Comment field:
+8005551212?        052410        Joe's home number
+5081231212?        052410        Joe's cell number
