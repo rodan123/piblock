@@ -24,7 +24,7 @@ I run piblock on a raspberrypi3 using an dedicated iphone4, running the Reflecti
    labeled by month. Example: callerID.dat.06 is the archived log from June past. 
    Copy the repo's logroate.d/piblock file to /etc/logrotate.d/piblock and edit the path to callerID.dat within.
    
-5) Added two new callerID.dat flags, in addition to "W" (whitelist) "B" (blacklist) and "-" (Answered), 
+5) Added two new callerID.dat tags, in addition to "W" (whitelist) "B" (blacklist) and "-" (Answered), 
    added "I" (Internet match) and "M" (Missed/VMail)
 
 6) Added fork of the jcadmin program by Don Cross (https://github.com/cosinekitty/jcadmin) modified to work with 
@@ -33,8 +33,8 @@ I run piblock on a raspberrypi3 using an dedicated iphone4, running the Reflecti
 7) Created a runpiblock.sh script to startup jcadmin and piblock. 
    Copy to your home directory and edit the program paths within as necessary.  
 
-8) Added softlink of 800notes.txt to 800notes.html, so that last matched caller internet data can be viewed
-   locally. I installed lynx on the raspberrypi3 to locally view the file over a SSH connection. 
+8) Added softlink of 800notes.txt to 800notes.html, so that the last matched caller internet data can easily 
+   be viewed locally. I installed lynx on the raspberrypi3 to view the file over a SSH connection. 
 
 
    
