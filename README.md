@@ -3,7 +3,7 @@ Fork of the jcblock junk call blocker to add features and changes that may be us
 
 This is a fork of the jcblock project by Walter S. Heath (http://jcblock.sourceforge.net/jcblock.html)
 
-I run piblock on a raspberrypi3 using an iphone4 as an ssh terminal and display.
+I run piblock on a raspberrypi3 using an iphone4 as a ssh terminal and display.
 
 07/01/16 - Initial commit
 
@@ -34,7 +34,7 @@ I run piblock on a raspberrypi3 using an iphone4 as an ssh terminal and display.
    Copy to your home directory and edit the program paths within as necessary.  
 
 8) Added softlink of 800notes.txt to 800notes.html, so that last matched caller internet data can be viewed
-   locally. I installed lynx on the raspberrypi3 to locally view the file over an SSH connection. 
+   locally. I installed lynx on the raspberrypi3 to locally view the file over a SSH connection. 
 
 
    
