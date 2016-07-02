@@ -21,7 +21,7 @@ I run this piblock on a raspberrypi3 using an iphone4 as a ssh terminal and disp
 4) Extended blacklist truncation time to one year. Removed callerID.dat truncation and use the system logrotate to
    handle callerID logs. Logrotate retains callerID logs for one year, rotates monthly, and archived logs are
    labeled by month. Example: callerID.dat.06 is the archived log from June past. 
-   Copy the repo's logroate.d/piblock file to /etc/logrotate.d/piblock and edit the path to calledID.dat within.
+   Copy the repo's logroate.d/piblock file to /etc/logrotate.d/piblock and edit the path to callerID.dat within.
    
 5) Added two new callerID.dat flags, in addition to "W" (whitelist) "B" (blacklist) and "-" (Answered), 
    added "I" (Internet match) and "M" (Missed)
