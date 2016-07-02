@@ -11,7 +11,7 @@ I run this piblock on a raspberrypi3 using an iphone4 as a ssh terminal and disp
 
 2) Added code to perform an additional check. Upon recieving a call from a number that is not already on either 
    the whitelist or the blacklist, the program checks to see if the number has been reported at 800notes.com. 
-   The program is brutal, if the number has been reported. It terminates the call and adds the caller's name
+   The program is brutal, if the number has been reported, it terminates the call and adds the caller's name
    to the blacklist.
 
 3) Added code to properly record, in the callerID.dat logfile, a call that goes to voicemail/answering machine.
@@ -19,7 +19,7 @@ I run this piblock on a raspberrypi3 using an iphone4 as a ssh terminal and disp
    option.
    
 4) Extended blacklist truncation time to one year. Removed callerID.dat truncation and use the system logrotate to
-   handle callerID logs. Logrotate then retains callerID logs for one year, rotates monthly, and archived logs are
+   handle callerID logs. Logrotate retains callerID logs for one year, rotates monthly, and archived logs are
    labeled by month. Example: callerID.dat.06 is the archived log from June past. 
    Copy the repo's logroate.d/piblock file to /etc/logrotate.d/piblock and edit the path to calledID.dat within.
    
