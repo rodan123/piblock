@@ -1,5 +1,5 @@
 # jcadmin-piblock
-Fork of the jcadmin program modified to work with piblock's handling of callerID rotation and tag additions.
+Fork of the jcadmin program modified to work with piblock's handling of callerID log rotation and tag additions.
 
 This is a fork of the jcadmin project by Don Cross (https://github.com/cosinekitty/jcadmin). It monitors the callerID log and experimentally allows entries to be modified.
 
