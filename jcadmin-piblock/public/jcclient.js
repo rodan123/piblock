@@ -489,7 +489,8 @@
 
     function SanitizeSpaces(text) {
         // Replace redundant white space with a single space and trim outside spaces.
-        return text ? text.replace(/\s+/g, ' ').trim() : '';
+        //return text ? text.replace(/\s+/g, ' ').trim() : '';
+        return text ? text.trim() : '';
     }
 
     function FormatDateTime(when, now) {
