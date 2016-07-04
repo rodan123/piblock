@@ -16,7 +16,7 @@ This is a fork of the jcadmin project by Don Cross (https://github.com/cosinekit
 07/04/16
 
 4) Modified jcclient.js SanitizeSpaces function to not remove whitespace from within. It was causing classification 
-   mismatches for callerID names that contained multiple spaces. ex: DIR ASSIST   CA
+   mismatches for callerID names that contained multiple spaces. ex;(.=sp): DIR.ASSIST...CA
        
 
   
