@@ -13,4 +13,10 @@ This is a fork of the jcadmin project by Don Cross (https://github.com/cosinekit
 
 3) Added two screenshots to show the modified app home screen.
 
+07/04/16
+
+4) Modified jcclient.js SanitizeSpaces function to not remove whitespace from within. It was causing classification 
+   mismatches for callerID names that contained multiple spaces. ex: DIR ASSIST   CA
+       
+
   
