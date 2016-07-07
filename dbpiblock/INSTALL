@@ -1,13 +1,13 @@
 Step 1: INSTALLATION
 
-Copy the dbpiblock file to a separate directory. 
+Copy the dbpiblock files to a separate directory. 
 
-Install required software and python modules on Raspberian.
+Install the required software and python modules on Raspberian.
 
-Install SQLAlchemy python module;
+Install the SQLAlchemy python module;
 $ sudo pip install SQLAlchemy
 
-Install pymysql python module;
+Install the pymysql python module;
 $ sudo pip install pymysql
 
 Install the MySQL program and python API extensions;
@@ -17,12 +17,12 @@ Note: At the completion of the program's install you will be prompted to provide
 
 Step 2: CONFIGURATION 
 
-Create an database user and an empty callerid database.
+Create a database user and an empty callerid database.
 
 Log into MySQL as the "root" user, enter the password you chose when prompted.
 $ mysql -u root -p
 
-At the database prompt create a user with the same name as your login account. The database password can and should be different from your login account. In the line below substitute your account name for pi and your chosen password instead of password. 
+At the database prompt create a user with the same name as your raspberrypi login account. The database password can and should be different from your login account. In the line below substitute your account name for pi and your chosen password instead of the word password. 
 mysql> CREATE USER 'pi'@'localhost' IDENTIFIED BY 'password';
 
 Create the empty database.
@@ -40,7 +40,7 @@ mysql> FLUSH PRIVILEGES;
 Exit the database.
 mysql> quit
 
-Edit the get getcall.py program to configure program paths and database credentials. See the two comment lines tagged with "********* EDIT" within the program.
+Edit the getcall.py program to configure program paths and callerid database credentials. See the two comment lines tagged with "********* EDIT" within the program.
 
 Using with piblock: Copy the logrotate.d/piblock config to /etc/logrotate.d/piblock to enable exectution before the  callerID.dat logfile is archived.
 
