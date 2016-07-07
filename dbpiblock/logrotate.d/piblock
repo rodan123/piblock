@@ -1,0 +1,12 @@
+/home/pi/piblock/callerID.dat { 
+        monthly
+	prerotate
+        python /home/pi/dbpiblock/getcall.py > /home/pi/dbpiblock/cidreport.log
+	endscript
+	nocompress
+        rotate 12
+        missingok
+	dateext
+	dateformat .%m
+	dateyesterday
+}

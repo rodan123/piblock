@@ -4,7 +4,7 @@ Fork of the jcblock junk call blocker to add features and changes that may be us
 This is a fork of the jcblock project by Walter S. Heath (http://jcblock.sourceforge.net/jcblock.html)
 
 I run piblock on a raspberrypi3 using an dedicated iphone4, running the Reflection SSH client, 
-(https://itunes.apple.com/us/app/reflection-for-unix-ssh-client/id920472514?mt=8ht), as a ssh terminal and display.
+(https://itunes.apple.com/us/app/reflection-for-unix-ssh-client/id920472514?mt=8ht), as a SSH terminal and display.
 
 07/01/16 - Initial commit
 
@@ -36,5 +36,8 @@ I run piblock on a raspberrypi3 using an dedicated iphone4, running the Reflecti
 8) Added softlink of 800notes.txt to 800notes.html, so that the last matched caller's internet data can easily 
    be viewed locally. I installed lynx on the raspberrypi3 to view the file over a SSH connection. 
 
+07/07/16
 
+9) Added fork of the jcblock_log_to_MySQL project by Thomas Miller 
+   (https://github.com/tomjavamiller/jcblock_log_to_MySQL) to the dbpiblock directory.
    
