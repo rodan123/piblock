@@ -4,7 +4,7 @@ Fork of the jcblock_log_to_MySQL program modified to run locally on a raspberryp
 This is a fork of the jcblock_log_to_MySQL project by Thomas Miller (https://github.com/tomjavamiller/jcblock_log_to_MySQL).
 
 I use it to keep a complete record of the callerID log.  It is run as a prerotation script for logrotate and adds the months callers to a MySQL database. It creates a report showing the all time most persistant blacklisted junk callers.
-Like the original author, I have a telephone feature that allows me to block a limited number of calling numbers (10), so that they do not even ring in. I would like to find the most obnoxious and persistant junk callers to include on that short list. Also, keeping a complete callerID history may prove beneficial for other uses in the future.
+Like the original author, I have a telephone feature that allows me to block a limited number of calling numbers (10), so that they do not even ring in. I would like to find the most persistant junk callers to include on that short list. Also, keeping a complete callerID history may prove beneficial for other uses in the future.
 
 The program may be run manually to create a current report.
 
