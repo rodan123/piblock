@@ -39,8 +39,10 @@ from sqlalchemy import create_engine, exists
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy.exc import IntegrityError
 
-#Edit to suit
+# ********* EDIT the paths below to suit installation
+# Home directory of piblock/jcblock
 piblockdir = "/home/pi/piblock/"
+# Home directory of the getpy.py program
 dbdir = "/home/pi/dbpiblock/"
 
 #Set min call total to display, default to 2 if not provided on command line.
@@ -51,7 +53,8 @@ if len(sys.argv) > 1:
     
 #setup sqlalchemy
 Base = declarative_base()
-engine = create_engine("mysql+pymysql://pi:piblock@localhost/callerid?charset=utf8&use_unicode=0")
+# ********* EDIT username:password (pi:password) to contain local user's database credentials
+engine = create_engine("mysql+pymysql://pi:password@localhost/callerid?charset=utf8&use_unicode=0")
 #engine = create_engine('sqlite:///:memory:', echo=True)
 Base.metadata.bind = engine
 
