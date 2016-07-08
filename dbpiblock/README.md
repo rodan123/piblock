@@ -19,5 +19,6 @@ The program may be run manually to create a current report.
 
 4) Created a /etc/logrotate/piblock config file to run this program before archiving the callerID log and create a current cidreport.log in the program directory.
        
+07/08/16
 
-  
+5) Added code to format the phone number in the output table, using the python port of Google's libphonenumber. Requires the installation of the phonenumber python module. See the INSTALL readme.

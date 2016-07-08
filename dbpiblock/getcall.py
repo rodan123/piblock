@@ -31,6 +31,7 @@ import re
 import os
 import sys
 import datetime
+import phonenumbers
 
 from sqlalchemy import Column, Integer, String, TIMESTAMP, ForeignKey, func, BLOB, and_
 from sqlalchemy.ext.declarative import declarative_base
@@ -44,6 +45,8 @@ from sqlalchemy.exc import IntegrityError
 piblockdir = "/home/pi/piblock/"
 # Home directory of the getpy.py program
 dbdir = "/home/pi/dbpiblock/"
+# Phone number format
+country = "US"
 
 #Set min call total to display, default to 2 if not provided on command line.
 calltotal = 1
@@ -154,12 +157,14 @@ def queryB():
     #print a table of output:
     results = engine.execute(query)
     # print("\n")
-    print("+------------+-----------------+----------+")
-    print("| number     | name            | count(*) |")
-    print("+------------+-----------------+----------+")
+    print("+----------------+-----------------+----------+")
+    print("| number         | name            | count(*) |")
+    print("+----------------+-----------------+----------+")
     for row in results:
-        print("| %-10.10s | %-15.15s | %8d |"%(row[0].decode(), row[1].decode(), row[2]) )
-    print("+------------+-----------------+----------+")
+        query = phonenumbers.format_number(phonenumbers.parse(row[0].decode(), country), phonenumbers.PhoneNumberFormat.NATIONAL)
+        #print("| %-14.14s | %-15.15s | %8d |"%(row[0].decode(), row[1].decode(), row[2]) )
+        print("| %-14.14s | %-15.15s | %8d |"%(query, row[1].decode(), row[2]) )
+    print("+----------------+-----------------+----------+")
 
 
 #define a main in order to comment out the main call in order to import in interactive python

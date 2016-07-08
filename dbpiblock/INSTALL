@@ -10,6 +10,9 @@ $ sudo pip install SQLAlchemy
 Install the pymysql python module;
 $ sudo pip install pymysql
 
+Install the phonenumbers python module;
+$ sudo pip install phonenumbers
+
 Install the MySQL program and python API extensions;
 $ sudo apt-get install mysql-server python-mysqldb
 
