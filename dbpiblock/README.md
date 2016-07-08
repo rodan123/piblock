@@ -21,4 +21,4 @@ The program may be run manually to create a current report.
        
 07/08/16
 
-5) Added code to format the phone number in the output table, using the python port of Google's libphonenumber. Requires the installation of the phonenumber python module. See the INSTALL readme.
+5) Added code to format the phone number in the output table, using the python port of Google's libphonenumber. Requires the installation of the phonenumbers python module. See the INSTALL readme.
