@@ -44,7 +44,7 @@ from sqlalchemy.exc import IntegrityError
 # ********* EDIT the paths below to suit installation
 # Home directory of piblock/jcblock
 piblockdir = "/home/pi/piblock/"
-# Home directory of the getpy.py program
+# Home directory of the getcall.py program
 dbdir = "/home/pi/dbpiblock/"
 # Phone number format
 country = "US"
