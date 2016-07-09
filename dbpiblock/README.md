@@ -21,7 +21,7 @@ The program may be run manually to create a current report.
        
 07/08/16
 
-5) Added code to format the phone number in the output table, using the python port of Google's libphonenumber. Requires the installation of the phonenumbers python module. See the INSTALL readme.
+5) Added code to format the phone number in the output table, using the python port of Google's libphonenumber. Requires the installation of the phonenumberslite python module. See the INSTALL readme.
 
 6) Added code to use the tabulate python module to format program output. Added an optional second argument to instruct program to output in HTML format.  Requires the installation of the tabulate python module. See the INSTALL readme.
 Ex: python getcall.py html, formats output as HTML; python getcall.py 4 html, limits output to callers who have called 4 or more times historically and formats output as HTML. 

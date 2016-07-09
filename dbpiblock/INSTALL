@@ -11,7 +11,7 @@ Install the pymysql python module;
 $ sudo pip install pymysql
 
 Install the phonenumbers python module;
-$ sudo pip install phonenumbers
+$ sudo pip install phonenumberslite
 
 Install the tabulate python module;
 $ sudo pip install tabulate
