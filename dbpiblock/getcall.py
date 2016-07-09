@@ -161,7 +161,6 @@ def queryB():
         having count(*) > "+str(calltotal)\
         +" order by count(*) desc, name"
         
-
     #print a table of output:
     results = engine.execute(query)
     # print("\n")
