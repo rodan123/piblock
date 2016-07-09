@@ -170,8 +170,7 @@ def queryB():
     # print("+----------------+-----------------+----------+")
     #for row in results:
     #    results[0] = phonenumbers.format_number(phonenumbers.parse(row[0].decode(), country), phonenumbers.PhoneNumberFormat.NATIONAL)
-    #     #print("| %-14.14s | %-15.15s | %8d |"%(row[0].decode(), row[1].decode(), row[2]) )
-    #     print("| %-14.14s | %-15.15s | %8d |"%(query, row[1].decode(), row[2]) )
+    #    print("| %-10.10s | %-15.15s | %8d |"%(row[0].decode(), row[1].decode(), row[2]) )
     # print("+----------------+-----------------+----------+")
     result = [r for r in results]
     results = []
