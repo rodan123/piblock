@@ -33,6 +33,7 @@ import sys
 import datetime
 import phonenumbers
 
+from tabulate import tabulate
 from sqlalchemy import Column, Integer, String, TIMESTAMP, ForeignKey, func, BLOB, and_
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import relationship, backref
@@ -49,11 +50,18 @@ dbdir = "/home/pi/dbpiblock/"
 country = "US"
 
 #Set min call total to display, default to 2 if not provided on command line.
-calltotal = 1
+calltotal = 0
+logmode ="simple"
 if len(sys.argv) > 1:
     if sys.argv[1].isdigit():
         calltotal = int(sys.argv[1]) - 1
-    
+    else:
+        if sys.argv[1].lower() == "html":
+            logmode = "html"
+    if len(sys.argv) > 2:
+        if sys.argv[2].lower() == "html":
+            logmode = "html"
+        
 #setup sqlalchemy
 Base = declarative_base()
 # ********* EDIT username:password (pi:password) to contain local user's database credentials
@@ -157,15 +165,27 @@ def queryB():
     #print a table of output:
     results = engine.execute(query)
     # print("\n")
-    print("+----------------+-----------------+----------+")
-    print("| number         | name            | count(*) |")
-    print("+----------------+-----------------+----------+")
-    for row in results:
-        query = phonenumbers.format_number(phonenumbers.parse(row[0].decode(), country), phonenumbers.PhoneNumberFormat.NATIONAL)
-        #print("| %-14.14s | %-15.15s | %8d |"%(row[0].decode(), row[1].decode(), row[2]) )
-        print("| %-14.14s | %-15.15s | %8d |"%(query, row[1].decode(), row[2]) )
-    print("+----------------+-----------------+----------+")
-
+    # print("+----------------+-----------------+----------+")
+    # print("| number         | name            | count(*) |")
+    # print("+----------------+-----------------+----------+")
+    #for row in results:
+    #    results[0] = phonenumbers.format_number(phonenumbers.parse(row[0].decode(), country), phonenumbers.PhoneNumberFormat.NATIONAL)
+    #     #print("| %-14.14s | %-15.15s | %8d |"%(row[0].decode(), row[1].decode(), row[2]) )
+    #     print("| %-14.14s | %-15.15s | %8d |"%(query, row[1].decode(), row[2]) )
+    # print("+----------------+-----------------+----------+")
+    result = [r for r in results]
+    results = []
+    for r in result:
+        x = r[0]
+        x = phonenumbers.format_number(phonenumbers.parse(x, country), phonenumbers.PhoneNumberFormat.NATIONAL)
+        if logmode == "simple":
+            x = [x, r[1], r[2]]
+            header = ["number", "name", "count"]
+        else:
+            x = [x, "...", r[1], r[2]]
+            header = ["number", "  ","name","count"]
+        results.append(x)
+    print tabulate(results, header, tablefmt=logmode)
 
 #define a main in order to comment out the main call in order to import in interactive python
 def main():
