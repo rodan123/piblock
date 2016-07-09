@@ -49,7 +49,7 @@ dbdir = "/home/pi/dbpiblock/"
 # Phone number format
 country = "US"
 
-#Set min call total to display, default to 2 if not provided on command line.
+#Set min call total to display, default to all.
 calltotal = 0
 logmode ="simple"
 if len(sys.argv) > 1:
