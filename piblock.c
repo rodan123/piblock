@@ -982,11 +982,12 @@ static bool check_internet( char *callstr )
             printf("Open (800notes output) failed\n" );
             }
           else {
+            state = TRUE;
             while( fgets( filebuf, sizeof( filebuf ), fpWeb ) != NULL )
               {
-                if( ( strptr = strstr( filebuf, "no reports yet" ) ) == NULL )
+                if( ( strptr = strstr( filebuf, "no reports yet" ) ) != NULL )
                   {
-                  state = TRUE;
+                  state = FALSE;
                   }
               }
           }
