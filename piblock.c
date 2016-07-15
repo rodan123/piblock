@@ -108,7 +108,7 @@ int wait_for_response(int fd);
 int send_modem_command(int fd, char *command );
 int send_timed_modem_command(int fd, char *command, int numSecs );
 static bool check_blacklist( char *callstr );
-static bool check_interweb( char *callstr );
+static bool check_internet( char *callstr );
 static bool write_blacklist( char *callstr, char *srcDesc);
 static bool check_whitelist( char * callstr );
 static void open_port( int mode );
@@ -538,7 +538,7 @@ int wait_for_response(fd)
       tag_and_write_callerID_record( buffer2, 'B');
       continue;
     }
-    else if( check_interweb( buffer2 ) == TRUE )
+    else if( check_internet( buffer2 ) == TRUE )
       {
       printf ("Internet matched. %s %s\n",call_date, call_time);
       sleep(1);
@@ -954,7 +954,7 @@ static bool check_whitelist( char *callstr )
   // No whitelist.dat entry matched, so return FALSE.
   return(FALSE);
 }
-static bool check_interweb( char *callstr )
+static bool check_internet( char *callstr )
 {
   char call_number[255];
   char *callptr;
@@ -994,7 +994,6 @@ static bool check_interweb( char *callstr )
         }
         else { printf ("Open (800notes site) failed\n"); }
       }
-
 //  printf ("%s\n", (state)?"TRUE":"FALSE");  
   return (state);
 }
