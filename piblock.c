@@ -965,8 +965,7 @@ static bool check_interweb( char *callstr )
   //Build 800notes query string
   if( (strptr = strstr( callstr, "NMBR = " ) ) != NULL )
       {
-		state = TRUE;
-        strcpy(call_number,"curl http://800notes.com/Phone.aspx/1-");
+        strcpy(call_number,"curl -f -s http://800notes.com/Phone.aspx/1-");
         callptr=strndup(strptr+7,3);
         strcat(call_number,callptr);
         strcat(call_number,"-");
@@ -975,22 +974,25 @@ static bool check_interweb( char *callstr )
         strcat(call_number,"-");
         callptr=strndup(strptr+13,4);
         strcat(call_number,callptr);
-        strcat(call_number, " -o 800notes.txt > /dev/null 2>&1");
-//        system ("curl http://800notes.com/Phone.aspx/1-818-555-1212 -o 800notes.txt > /dev/null 2>&1");
-        system (call_number);
-        if( (fpWeb = fopen( "./800notes.txt", "r+" ) ) == NULL )
-          {
-          printf("Open (800notes) failed\n" );
-          return(state);
-          }
-        while( fgets( filebuf, sizeof( filebuf ), fpWeb ) != NULL )
-          {
-            if( ( strptr = strstr( filebuf, "no reports yet" ) ) != NULL )
+        strcat(call_number, " -o 800notes.txt");
+//        system ("curl -s -f http://800notes.com/Phone.aspx/1-818-555-1212 -o 800notes.txt");
+        if (system (call_number) == 0) {
+          if( (fpWeb = fopen( "./800notes.txt", "r+" ) ) == NULL )
+            {
+            printf("Open (800notes output) failed\n" );
+            }
+          else {
+            while( fgets( filebuf, sizeof( filebuf ), fpWeb ) != NULL )
               {
-              state = FALSE;
+                if( ( strptr = strstr( filebuf, "no reports yet" ) ) == NULL )
+                  {
+                  state = TRUE;
+                  }
               }
           }
-        fclose(fpWeb); 
+          fclose(fpWeb);
+        }
+        else { printf ("Open (800notes site) failed\n"); }
       }
 
 //  printf ("%s\n", (state)?"TRUE":"FALSE");  

@@ -39,4 +39,9 @@ I run piblock on a raspberrypi3 using an dedicated iphone4, running the Reflecti
 07/07/16
 
 9) Added fork of the jcblock_log_to_MySQL project by Thomas Miller (https://github.com/tomjavamiller/jcblock_log_to_MySQL) to the dbpiblock directory.
-   
+
+07/15/16
+
+10) Added error handling to the 800notes.com check to skip it if the website is unavailable.
+
+
