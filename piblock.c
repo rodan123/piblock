@@ -956,7 +956,7 @@ static bool check_whitelist( char *callstr )
 }
 static bool check_internet( char *callstr )
 {
-  char call_number[255];
+  char call_number[100];
   char *callptr;
   char filebuf[100];
   char *strptr;
