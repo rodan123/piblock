@@ -29,5 +29,5 @@ I am using Exim and bsd-mailx on the raspberrypi to email the log monthly via Gm
 
 07/18/16
 
-7) Added code to display the date that the number had last called in the output table. Changed sort order to order by count, then by date.
-Improved the output of the HTML table.  
+7) Added code to display the date that the number had last called in the output table. Changed the table sort to order by count, then by date.
+Improved the formatting of the HTML table output.  
