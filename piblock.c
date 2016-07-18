@@ -598,7 +598,7 @@ int wait_for_response(fd)
       }
       buffer[i] = 0;
       
-      printf ("%s is unclassified.\nPress * to blacklist. %s %s\n\n",buffer, call_date, call_time);
+      printf ("%s is unclassified.\nDial * to blacklist. %s %s\n\n",buffer, call_date, call_time);
       // Reinitialize the serial port for polling
       close(fd);
       usleep( 250000 );         // quarter second
@@ -1418,7 +1418,7 @@ static void cleanup( int signo )
 #ifdef DEBUG
   printf("\nIn cleanup()...\n");
 #endif
-
+  printf ("Exiting program...");
   if( modemInitialized )
   {
     // Reset the modem
@@ -1444,7 +1444,7 @@ static void cleanup( int signo )
   }
 
   // Otherwise terminate normally
-printf ("Exiting program...");
+
   _exit(0);
 }
 

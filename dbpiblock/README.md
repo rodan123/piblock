@@ -26,3 +26,8 @@ The program may be run manually to create a current report.
 6) Added code to use the tabulate python module to format program output. Added an optional second argument to instruct program to output in HTML format.  Requires the installation of the tabulate python module. See the INSTALL readme.
 Ex: python getcall.py html, formats output as HTML; python getcall.py 4 html, limits output to callers who have called 4 or more times historically and formats output as HTML. 
 I am using Exim and bsd-mailx on the raspberrypi to email the log monthly via Gmail in HTML format.
+
+07/18/16
+
+7) Added code to display the date that the number had last called in the output table. Changed sort order to order by count, then by date.
+Improved the output of the HTML table.  

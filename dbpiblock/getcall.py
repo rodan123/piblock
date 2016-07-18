@@ -52,20 +52,23 @@ country = "US"
 #Set min call total to display, default to all.
 calltotal = 0
 logmode ="simple"
+header = ["number", "name", "last call", "count"]
 if len(sys.argv) > 1:
     if sys.argv[1].isdigit():
         calltotal = int(sys.argv[1]) - 1
     else:
         if sys.argv[1].lower() == "html":
             logmode = "html"
+            header = ["number", " ","name", " ", "last call", " ", "count"]
     if len(sys.argv) > 2:
         if sys.argv[2].lower() == "html":
             logmode = "html"
+            header = ["number", " ","name", " ", "last call", " ", "count"]
         
 #setup sqlalchemy
 Base = declarative_base()
 # ********* EDIT username:password (pi:password) to contain local user's database credentials
-engine = create_engine("mysql+pymysql://pi:password@localhost/callerid?charset=utf8&use_unicode=0")
+engine = create_engine("mysql+pymysql://pi:piblock@localhost/callerid?charset=utf8&use_unicode=0")
 #engine = create_engine('sqlite:///:memory:', echo=True)
 Base.metadata.bind = engine
 
@@ -154,12 +157,12 @@ def readCallLog():
 def queryB():
     #           and c2.timestamp > DATE_SUB(NOW(), INTERVAL 365 DAY)) \
     # count all the calls from numbers that called recently with a b (blacklisted):
-    query = "select number, name, count(*) from callerid c1 \
+    query = "select number, name, count(*), max(timestamp) from callerid c1 \
             where exists (select * from callerid c2 where c1.number = c2.number and (c2.code = 'B' or c2.code = 'I')) \
             and not exists (select * from callerid b where c1.number = b.number and b.code is null) \
         group by number \
         having count(*) > "+str(calltotal)\
-        +" order by count(*) desc, name"
+        +" order by count(*) desc, max(timestamp) desc, name"
         
     #print a table of output:
     results = engine.execute(query)
@@ -169,19 +172,18 @@ def queryB():
     # print("+----------------+-----------------+----------+")
     #for row in results:
     #    results[0] = phonenumbers.format_number(phonenumbers.parse(row[0].decode(), country), phonenumbers.PhoneNumberFormat.NATIONAL)
-    #    print("| %-10.10s | %-15.15s | %8d |"%(row[0].decode(), row[1].decode(), row[2]) )
+    #     print("| %-10.10s | %-15.15s | %8d |"%(row[0].decode(), row[1].decode(), row[2]) )
     # print("+----------------+-----------------+----------+")
     result = [r for r in results]
     results = []
     for r in result:
         x = r[0]
+        d = str.split(str(r[3]))
         x = phonenumbers.format_number(phonenumbers.parse(x, country), phonenumbers.PhoneNumberFormat.NATIONAL)
         if logmode == "simple":
-            x = [x, r[1], r[2]]
-            header = ["number", "name", "count"]
+            x = [x, r[1], d[0], r[2]]
         else:
-            x = [x, "...", r[1], r[2]]
-            header = ["number", "  ","name","count"]
+            x = [x, "&ensp;", r[1], "&ensp;", d[0], "&ensp;", r[2]]
         results.append(x)
     print tabulate(results, header, tablefmt=logmode)
 
