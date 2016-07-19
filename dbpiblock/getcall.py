@@ -162,7 +162,7 @@ def queryB():
             and not exists (select * from callerid b where c1.number = b.number and b.code is null) \
         group by number \
         having count(*) > "+str(calltotal)\
-        +" order by count(*) desc, max(timestamp) desc, name"
+        +" order by count(*) desc, max(timestamp) desc"
         
     #print a table of output:
     results = engine.execute(query)
