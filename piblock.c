@@ -49,6 +49,7 @@
 #include <signal.h>
 #include "common.h" //Must be before ncurses include
 #include <term.h>
+#include <alsa/asoundlib.h>
 
 //#include <ncurses.h>
 
@@ -114,6 +115,7 @@ static bool check_whitelist( char * callstr );
 static void open_port( int mode );
 int init_modem(int fd);
 int tag_and_write_callerID_record( char *buffer, char tagChar);
+int write_callerinfo( char *buffer);
 void* blockForStarKey(void *arg);
 
 static char *copyright = "\n"
@@ -599,6 +601,7 @@ int wait_for_response(fd)
       buffer[i] = 0;
       
       printf ("%s is unclassified.\nDial * to blacklist. %s %s\n\n",buffer, call_date, call_time);
+      write_callerinfo (buffer);
       // Reinitialize the serial port for polling
       close(fd);
       usleep( 250000 );         // quarter second
@@ -800,6 +803,29 @@ int tag_and_write_callerID_record( char *buffer, char tagChar)
   if( fflush(fpCa) == EOF )
   {
     printf("fflush(fpCa) failed\n");
+    return(-1);
+  }
+  return(0);
+}
+
+int write_callerinfo( char *buffer)
+{
+  if( (fpCa = fopen( "./incoming.dat", "w" ) ) == NULL )
+  {
+    printf("open() of incoming.dat failed\n");
+    return(-1);
+  }
+  // Write the record to the file
+  if( fputs( (const char *)buffer, fpCa ) == EOF )
+  {
+    printf("Write to incoming.dat failed\n");
+    return(-1);
+  }
+
+  // Flush the record to the file
+  if( fflush(fpCa) == EOF )
+  {
+    printf("fflush incoming.dat failed\n");
     return(-1);
   }
   return(0);
@@ -1418,7 +1444,7 @@ static void cleanup( int signo )
 #ifdef DEBUG
   printf("\nIn cleanup()...\n");
 #endif
-  printf ("Exiting program...");
+  printf ("\nExiting piblock...");
   if( modemInitialized )
   {
     // Reset the modem
