@@ -2,7 +2,7 @@ Step 1: INSTALLATION
 
 Copy the dbpiblock files to a separate directory. 
 
-Install the required software and python modules on Raspberian.
+Install the required software and python modules on Raspbian.
 
 Install the SQLAlchemy python module;
 $ sudo pip install SQLAlchemy
