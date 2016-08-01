@@ -44,4 +44,7 @@ I run piblock on a raspberrypi3 using an dedicated iphone4, running the Reflecti
 
 10) Added error handling to the 800notes.com check to skip it if the website is unavailable.
 
+08/01/16
+
+11) Added a small bit of code to write out an unclassified callers name to hand off to IBM Bluemix. Does nothing, only useful with the node-red extension (see wiki)
 
