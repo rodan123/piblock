@@ -1,13 +1,14 @@
 /*
- *	Program name: jcblockAT
+ *	Program name: piblock
  *
- *	File name: jcblockAT.c
+ *	File name: piblock.c
  *
  *	Note: this file contains a version of the jcblock program designed
  *	specifically for the ATian voice/FAX modem. This modem provides
  *	all hardware features necessary to support all program operations.
  *
  *	Copyright: 	Copyright 2015 Walter S. Heath
+ *	Modififications: Copyright 2016 Charles D. Johnston
  *
  *	Copy permission:
  *	This program is free software: you can redistribute it and/or modify
@@ -49,7 +50,7 @@
 #include <signal.h>
 #include "common.h" //Must be before ncurses include
 #include <term.h>
-#include <alsa/asoundlib.h>
+//#include <alsa/asoundlib.h>
 
 //#include <ncurses.h>
 
@@ -88,6 +89,7 @@
 
 #define OPEN_PORT_BLOCKED 1
 #define OPEN_PORT_POLLED  0
+#define MIN_ASCII_MATCH 5
 
 // Default serial port specifier.
 char *serialPort = "/dev/ttyACM0";
@@ -1031,7 +1033,10 @@ static bool check_internet( char *callstr )
 //
 static bool check_blacklist( char *callstr )
 {
+  bool match = FALSE;
   char blackbuf[100];
+  char buffer [20];
+  int i;
   char blackbufsave[100];
   char *blackbufptr;
   char call_date[10];
@@ -1124,9 +1129,26 @@ static bool check_blacklist( char *callstr )
       printf("blackbuf strtok() failed\n");
       return(FALSE);
     }
-
+    if (strstr(callstr, blackbufptr) != NULL ) {
+      // If blacklist entry is all digits or at least MIN_ASCII_MATCH characters long do a standard wildcard match   
+      if (strspn(blackbufptr, "0123456789") == strlen(blackbufptr) || strlen (blackbufptr) >= MIN_ASCII_MATCH )
+        {
+          match = TRUE;
+        } else if ((dateptr = strstr( callstr, "NAME = " ) ) != NULL) {
+          // Else require an exact blacklist match to the callerID name
+            i = 0;
+            while(dateptr[i+7] != '-' && i < 16) {
+              buffer[i] = dateptr[i+7];
+              i++;
+            }
+            buffer[i] = 0;
+            //printf ("*%s* *%s*\n", buffer, blackbufptr);
+            if (strcmp (buffer, blackbufptr) == 0) match = TRUE;
+          }
+        }
     // Scan the call string for the blacklist entry
-    if( strstr( callstr, blackbufptr ) != NULL )
+    //if (strstr( callstr, blackbufptr ) != NULL)
+    if (match)
     {
 #ifdef DEBUG
       printf("blacklist entry matches: %s\n", blackbuf );

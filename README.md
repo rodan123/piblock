@@ -48,3 +48,7 @@ I run piblock on a raspberrypi3 using an dedicated iphone4, running the Reflecti
 
 11) Added a small bit of code to write out an unclassified callers name to hand off to IBM Bluemix. Does nothing, only useful with the node-red extension (see wiki)
 
+08/14/16
+
+12) Added code to change handling of short blacklist entries. Found an internet matched caller who was added to the blacklist and has a two character callerID name. Realized it might be a problem if really short names are blacklisted, because the program matched any callerID record that contained the blacklist entry as a substring. Changed the behavior to require that any blacklist entry of less than 5 non-numeric characters must match the callerID name exactly. Numeric blacklist entries are exempted, since one may want to blacklist an entire area code with a three digit blacklist entry and blacklist entries of over 5 characters in length will still match as a substring.   
+
