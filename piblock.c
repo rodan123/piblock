@@ -1137,7 +1137,7 @@ static bool check_blacklist( char *callstr )
       if ((strspn(blackbufptr, "0123456789") == strlen(blackbufptr) || strlen (blackbufptr) >= MIN_ASCII_MATCH) && i >= 30 )
         {
           match = TRUE;
-        } else if ((dateptr = strstr( callstr, "NAME = " ) ) != NULL && i >= 30) {
+        } else if ((dateptr = strstr( callstr, "NAME = " ) ) != NULL && i >= 55) {
           // Else require an exact blacklist match to the callerID name
             i = 0;
             while(dateptr[i+7] != '-' && i < 16) {
