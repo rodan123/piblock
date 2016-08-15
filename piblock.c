@@ -1129,9 +1129,12 @@ static bool check_blacklist( char *callstr )
       printf("blackbuf strtok() failed\n");
       return(FALSE);
     }
-    if (strstr(callstr, blackbufptr) != NULL ) {
-      // If blacklist entry is all digits or at least MIN_ASCII_MATCH characters long do a standard wildcard match   
-      if (strspn(blackbufptr, "0123456789") == strlen(blackbufptr) || strlen (blackbufptr) >= MIN_ASCII_MATCH )
+    //if (strstr(callstr, blackbufptr) != NULL ) {
+    if ((dateptr = strstr(callstr, blackbufptr)) !=NULL ) { 
+      i = dateptr-callstr;
+      // If blacklist entry is all digits or at least MIN_ASCII_MATCH characters long do a standard substring match
+      //Don't match date and time fields in the callerID record
+      if ((strspn(blackbufptr, "0123456789") == strlen(blackbufptr) || strlen (blackbufptr) >= MIN_ASCII_MATCH) && i >= 30 )
         {
           match = TRUE;
         } else if ((dateptr = strstr( callstr, "NAME = " ) ) != NULL) {

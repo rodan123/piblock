@@ -50,5 +50,10 @@ I run piblock on a raspberrypi3 using an dedicated iphone4, running the Reflecti
 
 08/14/16
 
-12) Added code to change handling of short blacklist entries. Changed the behavior to require that any blacklist entry of less than 5 characters must match the callerID name exactly. Pure numeric blacklist entries are exempted and blacklist entries of 5 or more characters will still match as a substring.   
+12) Added code to change handling of short blacklist entries. Changed the behavior to require that any blacklist entry of less than 5 characters must match the callerID name exactly. Pure numeric blacklist entries are exempted and blacklist entries of 5 or more characters will still match as a substring. 
+
+08/15/16
+
+13) Added code to prevent blacklist entries from matching the date and time fields in the callerID string.
+  
 
