@@ -17,6 +17,11 @@ This is a fork of the jcadmin project by Don Cross (https://github.com/cosinekit
 
 4) Modified jcclient.js SanitizeSpaces function to not remove whitespace from within. It was causing classification 
    mismatches for callerID names that contained multiple spaces.
+
+08/25/16
+
+5) Applied a few fixes from the https://github.com/cosinekitty/jcadmin master. 
+Particularly; Fixed #38 - Added horizontal line between history rows that cross calendar dates. Eliminated redundant copy of function FormatDateTime. Fixed #42 - make sure there is a newline delimiting appended record.
        
 
   
