@@ -523,7 +523,7 @@ function AddPhoneNumberToFile(filename, phonenumber, response, callback) {
             // Append a new line to the blacklist file.
             var record = MakePhoneNumberRecord(phonenumber);
             
-	    // Special case: it is possible for the text file to lack a newline
+            // Special case: it is possible for the text file to lack a newline
             // at its end. To prevent corrupting the last line, insert a newline
             // if needed.
             if (data.length > 0 && data.charAt(data.length - 1) !== '\n') {
