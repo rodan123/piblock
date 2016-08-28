@@ -21,6 +21,10 @@ This is a fork of the jcadmin project by Don Cross (https://github.com/cosinekit
 08/25/16
 
 5) Merged a few changes from the master repository. (https://github.com/cosinekitty/jcadmin) Particularly; Fixed #38 - Added horizontal line between history rows that cross calendar dates. Eliminated redundant copy of function FormatDateTime. Fixed #42 - make sure there is a newline delimiting appended record.
+
+08/28/16
+
+6) Merge; Fixed #39 - Allow user to cycle through showing all, blocked, safe, neutral on history display. 
        
 
   
