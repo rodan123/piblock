@@ -1017,7 +1017,7 @@ static bool check_internet( char *callstr )
                 search_buf[0] = '\0'; //init buffer
                 strcat(search_buf,call_number); // previous line
                 strcat(search_buf,filebuf); // current line
-                if( (strstr(search_buf, "no reports yet") != NULL) || (strstr(search_buf, "Did you get a call") != NULL))
+                if (strstr(search_buf, "no reports yet") != NULL)
                   {
                   //printf ("%s*\n\n%s\n",filebuf,search_buf );
                   state = FALSE;
