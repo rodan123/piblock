@@ -987,6 +987,7 @@ static bool check_internet( char *callstr )
   char call_number[100];
   char *callptr;
   char filebuf[100];
+  char search_buf[250];
   char *strptr;
   bool state = FALSE;
   
@@ -1013,10 +1014,15 @@ static bool check_internet( char *callstr )
             state = TRUE;
             while( fgets( filebuf, sizeof( filebuf ), fpWeb ) != NULL )
               {
-                if( ( strptr = strstr( filebuf, "no reports yet" ) ) != NULL )
+                search_buf[0] = '\0'; //init buffer
+                strcat(search_buf,call_number); // previous line
+                strcat(search_buf,filebuf); // current line
+                if( (strstr(search_buf, "no reports yet") != NULL) || (strstr(search_buf, "Did you get a call") != NULL))
                   {
+                  //printf ("%s*\n\n%s\n",filebuf,search_buf );
                   state = FALSE;
                   }
+                strcpy(call_number, filebuf); // current line to previous
               }
           }
           fclose(fpWeb);
@@ -1133,12 +1139,13 @@ static bool check_blacklist( char *callstr )
     if ((dateptr = strstr(callstr, blackbufptr)) !=NULL ) { 
       i = dateptr-callstr;
       // If blacklist entry is all digits or at least MIN_ASCII_MATCH characters long do a standard substring match
-      //Don't match date and time fields in the callerID record
+      //  and don't match date and time fields in the callerID record (characters before position 30)
       if ((strspn(blackbufptr, "0123456789") == strlen(blackbufptr) || strlen (blackbufptr) >= MIN_ASCII_MATCH) && i >= 30 )
         {
           match = TRUE;
         } else if ((dateptr = strstr( callstr, "NAME = " ) ) != NULL && i >= 55) {
           // Else require an exact blacklist match to the callerID name
+          // Don't bother if match was before 'NAME =' in callerID string (position 55)
             i = 0;
             while(dateptr[i+7] != '-' && i < 16) {
               buffer[i] = dateptr[i+7];

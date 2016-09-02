@@ -56,4 +56,6 @@ I run piblock on a raspberrypi3 using an dedicated iphone4, running the Reflecti
 
 13) Added code to prevent blacklist entries from matching the date and time fields in the callerID string.
   
+09/02/16
 
+14) Improved 800notes junk call detection.
