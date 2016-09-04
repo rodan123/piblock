@@ -984,28 +984,27 @@ static bool check_whitelist( char *callstr )
 }
 static bool check_internet( char *callstr )
 {
-  char call_number[100];
+  char search_buf[200];
   char *callptr;
   char filebuf[100];
-  char search_buf[250];
   char *strptr;
   bool state = FALSE;
   
   //Build 800notes query string
   if( (strptr = strstr( callstr, "NMBR = " ) ) != NULL )
       {
-        strcpy(call_number,"curl -f -s http://800notes.com/Phone.aspx/1-");
+        strcpy(search_buf,"curl -f -s http://800notes.com/Phone.aspx/1-");
         callptr=strndup(strptr+7,3);
-        strcat(call_number,callptr);
-        strcat(call_number,"-");
+        strcat(search_buf,callptr);
+        strcat(search_buf,"-");
         callptr=strndup(strptr+10,3);
-        strcat(call_number,callptr);
-        strcat(call_number,"-");
+        strcat(search_buf,callptr);
+        strcat(search_buf,"-");
         callptr=strndup(strptr+13,4);
-        strcat(call_number,callptr);
-        strcat(call_number, " -o 800notes.txt");
+        strcat(search_buf,callptr);
+        strcat(search_buf, " -o 800notes.txt");
 //        system ("curl -s -f http://800notes.com/Phone.aspx/1-818-555-1212 -o 800notes.txt");
-        if (system (call_number) == 0) {
+        if (system (search_buf) == 0) {
           if( (fpWeb = fopen( "./800notes.txt", "r+" ) ) == NULL )
             {
             printf("Open (800notes output) failed\n" );
@@ -1014,15 +1013,13 @@ static bool check_internet( char *callstr )
             state = TRUE;
             while( fgets( filebuf, sizeof( filebuf ), fpWeb ) != NULL )
               {
-                search_buf[0] = '\0'; //init buffer
-                strcat(search_buf,call_number); // previous line
                 strcat(search_buf,filebuf); // current line
                 if (strstr(search_buf, "no reports yet") != NULL)
                   {
                   //printf ("%s*\n\n%s\n",filebuf,search_buf );
                   state = FALSE;
                   }
-                strcpy(call_number, filebuf); // current line to previous
+                strcpy(search_buf, filebuf); // current line to previous
               }
           }
           fclose(fpWeb);
