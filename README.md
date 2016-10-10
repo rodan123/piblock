@@ -11,7 +11,7 @@ I run piblock on a raspberrypi3 using an dedicated iphone4, running the Reflecti
 1) Added text output formated to iphone screen to display program status and call handling information.
 
 2) Added code to perform an additional check. Upon receiving a call from a number that is not already on either 
-   the whitelist or the blacklist, the program checks to see if the number has been reported at 800notes.com. 
+   the whitelist or the blacklist, the program checks to see if the number has been reported at 800-----.com. 
    The program is brutal, if the number has been reported, it terminates the call and adds the caller's name
    to the blacklist.
 
@@ -33,7 +33,7 @@ I run piblock on a raspberrypi3 using an dedicated iphone4, running the Reflecti
 7) Created a runpiblock.sh script to startup jcadmin and piblock. 
    Copy to your home directory and edit the program paths within as necessary.  
 
-8) Added softlink of 800notes.txt to 800notes.html, so that the last matched caller's internet data can easily 
+8) Added softlink of 800-----.txt to 800-----.html, so that the last matched caller's internet data can easily 
    be viewed locally. I installed lynx on the raspberrypi3 to view the file over a SSH connection. 
 
 07/07/16
@@ -42,7 +42,7 @@ I run piblock on a raspberrypi3 using an dedicated iphone4, running the Reflecti
 
 07/15/16
 
-10) Added error handling to the 800notes.com check to skip it if the website is unavailable.
+10) Added error handling to the 800-----.com check to skip it if the website is unavailable.
 
 08/01/16
 
@@ -58,4 +58,8 @@ I run piblock on a raspberrypi3 using an dedicated iphone4, running the Reflecti
   
 09/02/16
 
-14) Improved 800notes junk call detection.
+14) Improved 800----- junk call detection.
+
+10/10/16
+
+15) Added headers to curl query to get past recently implemented 800----- octonet filter. Removed references to 800----- from README.md in the unlikely event that curl was filtered on the site because of piblock automated queries.

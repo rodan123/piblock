@@ -984,16 +984,16 @@ static bool check_whitelist( char *callstr )
 }
 static bool check_internet( char *callstr )
 {
-  char search_buf[200];
+  char search_buf[300]; // 2x file_buf (3x for curl headers)
   char *callptr;
-  char filebuf[100];
+  char filebuf[100]; 
   char *strptr;
   bool state = FALSE;
   
   //Build 800notes query string
   if( (strptr = strstr( callstr, "NMBR = " ) ) != NULL )
       {
-        strcpy(search_buf,"curl -f -s http://800notes.com/Phone.aspx/1-");
+        strcpy(search_buf,"curl -f -s -H 'Accept:text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8' -H 'User-Agent:Mozilla/5.0 (X11; Linux i686) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/53.0.2785.92 Safari/537.36' http://800notes.com/Phone.aspx/1-");
         callptr=strndup(strptr+7,3);
         strcat(search_buf,callptr);
         strcat(search_buf,"-");
