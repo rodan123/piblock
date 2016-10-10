@@ -28,7 +28,7 @@ This is a fork of the jcadmin project by Don Cross (https://github.com/cosinekit
 
 10/10/16
 
-7) Added an "asterisk" icon to tag entries that were manually blocked using the star key from a handset.
+7) Added an "asterisk" icon to tag entries that were manually blacklisted using the star key from a handset.
        
 
   
