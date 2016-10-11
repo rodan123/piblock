@@ -158,7 +158,7 @@ def queryB():
     #           and c2.timestamp > DATE_SUB(NOW(), INTERVAL 365 DAY)) \
     # count all the calls from numbers that called recently with a b (blacklisted):
     query = "select number, name, count(*), max(timestamp) from callerid c1 \
-            where exists (select * from callerid c2 where c1.number = c2.number and (c2.code = 'B' or c2.code = 'I')) \
+            where exists (select * from callerid c2 where c1.number = c2.number and (c2.code = 'B' or c2.code = 'I' or c2.code = '*')) \
             and not exists (select * from callerid b where c1.number = b.number and b.code is null) \
         group by number \
         having count(*) > "+str(calltotal)\

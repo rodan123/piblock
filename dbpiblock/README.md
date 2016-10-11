@@ -31,3 +31,7 @@ I am using Exim and bsd-mailx on the raspberrypi to email the log monthly via Gm
 
 7) Added code to display the date that the number had last called in the output table. Changed the table sort to order by count, then by date.
 Improved the formatting of the HTML table output.  
+
+10/10/16
+
+8) Addition of manually blacklisted calls (* key) to the database.  
