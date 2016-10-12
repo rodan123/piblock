@@ -993,7 +993,7 @@ static bool check_internet( char *callstr )
   //Build 800notes query string
   if( (strptr = strstr( callstr, "NMBR = " ) ) != NULL )
       {
-        strcpy(search_buf,"curl -f -s -H 'Accept:text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8' -H 'User-Agent:Mozilla/5.0 (X11; Linux i686) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/53.0.2785.92 Safari/537.36' http://800notes.com/Phone.aspx/1-");
+        strcpy(search_buf,"curl -f -s -H \'Accept:text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8\' -H \'User-Agent:Mozilla/5.0 (X11; Linux i686) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/53.0.2785.92 Safari/537.36\' http://800notes.com/Phone.aspx/1-");
         callptr=strndup(strptr+7,3);
         strcat(search_buf,callptr);
         strcat(search_buf,"-");
@@ -1011,6 +1011,7 @@ static bool check_internet( char *callstr )
             }
           else {
             state = TRUE;
+            strcpy (search_buf , ""); //clear search buffer
             while( fgets( filebuf, sizeof( filebuf ), fpWeb ) != NULL )
               {
                 strcat(search_buf,filebuf); // current line
