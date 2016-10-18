@@ -63,3 +63,7 @@ I run piblock on a raspberrypi3 using an dedicated iphone4, running the Reflecti
 10/10/16
 
 15) Added headers to curl query to get past recently implemented 800----- octonet filter. Removed references to 800----- from README.md in the unlikely event that curl was filtered on the site because of piblock automated queries.
+
+10/18/16
+
+16) Changes on the 800----- website, they changed wording on phone lookup. Modified program to work with it. 

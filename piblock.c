@@ -1010,15 +1010,14 @@ static bool check_internet( char *callstr )
             printf("Open (800notes output) failed\n" );
             }
           else {
-            state = TRUE;
             strcpy (search_buf , ""); //clear search buffer
             while( fgets( filebuf, sizeof( filebuf ), fpWeb ) != NULL )
               {
                 strcat(search_buf,filebuf); // current line
-                if (strstr(search_buf, "no reports yet") != NULL)
+                if (strstr(search_buf, "Read below") != NULL)
                   {
                   //printf ("%s*\n\n%s\n",filebuf,search_buf );
-                  state = FALSE;
+                  state = TRUE;
                   }
                 strcpy(search_buf, filebuf); // current line to previous
               }
