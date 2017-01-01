@@ -324,8 +324,11 @@ app.delete('/api/caller/:phonenumber', (request, response) => {
         return;
     }
     var now = new Date();
-    var newdata;
-    var archiveFileName = jcLogFile + '.' + ZeroPad(now.getMonth(), 2);
+    var newdata = now.getMonth();
+    if (newdata == 0) {
+        newdata = 12; // 12th month at year change not 0
+    }
+    var archiveFileName = jcLogFile + '.' + ZeroPad(newdata, 2);
     fs.readFile(archiveFileName, 'utf8', (err, data) => {
         if (!err) {
             newdata=data;
@@ -377,8 +380,11 @@ app.get('/api/caller/:phonenumber', (request, response) => {
     // Search for any information we know about this phone number.
     // Process the entire caller ID log and see if the number is there.
     var now = new Date();
-    var newdata;
-    var archiveFileName = jcLogFile + '.' + ZeroPad(now.getMonth(), 2);
+    var newdata = now.getMonth();
+    if (newdata == 0) {
+        newdata = 12; // 12th month at year change not 0
+    }
+    var archiveFileName = jcLogFile + '.' + ZeroPad(newdata, 2);
     fs.readFile(archiveFileName, 'utf8', (err, data) => {
         if (!err) {
             newdata=data;
