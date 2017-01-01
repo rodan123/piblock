@@ -297,8 +297,11 @@ app.get('/api/calls/:start/:limit', (request, response) => {
     var start = ParseIntParam(request.params.start, 0);
     var limit = ParseIntParam(request.params.limit, 1000000000);
     var now = new Date();
-    var newdata;
-    var archiveFileName = jcLogFile + '.' + ZeroPad(now.getMonth(), 2);
+    var newdata = now.getMonth();
+    if (newdata == 0) {
+        newdata = 12; // 12th month at year change not 0
+    }
+    var archiveFileName = jcLogFile + '.' + ZeroPad(newdata, 2);
     fs.readFile(archiveFileName, 'utf8', (err, data) => {
         if (!err) {
             newdata=data;
