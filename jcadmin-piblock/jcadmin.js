@@ -302,6 +302,7 @@ app.get('/api/calls/:start/:limit', (request, response) => {
         newdata = 12; // 12th month at year change not 0
     }
     var archiveFileName = jcLogFile + '.' + ZeroPad(newdata, 2);
+    newdata = "";
     fs.readFile(archiveFileName, 'utf8', (err, data) => {
         if (!err) {
             newdata=data;
@@ -329,6 +330,7 @@ app.delete('/api/caller/:phonenumber', (request, response) => {
         newdata = 12; // 12th month at year change not 0
     }
     var archiveFileName = jcLogFile + '.' + ZeroPad(newdata, 2);
+    newdata = "";
     fs.readFile(archiveFileName, 'utf8', (err, data) => {
         if (!err) {
             newdata=data;
@@ -385,6 +387,7 @@ app.get('/api/caller/:phonenumber', (request, response) => {
         newdata = 12; // 12th month at year change not 0
     }
     var archiveFileName = jcLogFile + '.' + ZeroPad(newdata, 2);
+    newdata = "";
     fs.readFile(archiveFileName, 'utf8', (err, data) => {
         if (!err) {
             newdata=data;
