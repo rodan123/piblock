@@ -2,7 +2,7 @@
         monthly
 	prerotate
         python /home/pi/dbpiblock/getcall.py 2 html > /home/pi/dbpiblock/cidreport.log
-	mail -a 'Content-Type: text/html' -s "Monthly Call Report" charlie.d.johnston@gmail.com < /home/pi/dbpiblock/cidreport.log
+	mail -a 'Content-Type: text/html' -s "Monthly Call Report" youremailaddress@somewhere.com < /home/pi/dbpiblock/cidreport.log
 	endscript
 	nocompress
         rotate 12
