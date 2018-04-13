@@ -17,7 +17,6 @@ Cell Phone   CA?   010110        ALL CA CELL PHONES
 Paging Phone?      102110        Junk calls
 PAGING PHONE?      010110        JUNK CALLS
 MARKETING?         080110        JUNK CALLS
-#UNAVAILABLE?       010110        POLITICAL CALLS
 FRIENDS OF?        010110        POLICICAL CALLS
 CHOICE?            081410        POLITICAL CALLS
 3 MOS FREE?        092510        JUNK CALL
@@ -46,7 +45,5 @@ LOAN MOD SERV?     050810        JUNK CALL
 TELEMARKETER?      051210        JUNK CALL
 HELP?              051210        JUNK CALL
 ASSOC          ?   080410        JUNK CALL
-NMBR = 91313?      081910        BAD NUMBER
 Washington   DC?   020310        JUNK CALL
 MORTAGE SPECIA?    031510        JUNK CALL
-NMBR = 809?        032510        BAD AREA CODE

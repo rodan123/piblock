@@ -138,6 +138,54 @@ void ClearScreen()
 
   putp( tigetstr( "clear" ) );
   }
+ 
+char *strtrim(char *str)
+  {
+    size_t len = 0;
+    char *frontp = str-1;
+    char *endp = NULL;
+    if(str==NULL)
+        return NULL;
+ 
+    if(str[0]=='\0')
+        return str;
+    len = strlen(str);
+    endp = str + len;
+   
+    /* Move the front and back pointers to address the first non-whitespace characters from
+     * each end.
+     */
+
+    while(isspace(*(++frontp)))
+        ;
+    while(isspace(*(--endp)) && endp!=frontp)
+        ;
+   
+    if(str+len-1!=endp)
+    {
+        *(endp + 1) = '\0';
+    }
+    else if(frontp!=str && endp==frontp)
+    {
+        *str = '\0';
+    }
+    
+    /* Shift the string so that it starts at str so that if it's dynamically allocated, we can
+     * still free it on the returned pointer.  Note the reuse of endp to mean the front of the
+     * string buffer now.
+     */
+
+    endp = str;
+    if(frontp!=str)
+    {
+        while(*frontp)
+        {
+            *endp++ = *frontp++;
+        }
+        *endp = '\0';
+    }
+    return str;
+} 
 
 // Main function
 
@@ -352,6 +400,8 @@ int wait_for_response(fd)
   char buffer[255];     // Input buffers
   char buffer2[255];
   char bufRing[10];     // RING input buffer
+  char unknname[] = "UNKNOWN NAME";
+ // char uc_name[100];
   char *nameptr;
   int nbytes;           // Number of bytes read
   int i, j, k;
@@ -363,6 +413,9 @@ int wait_for_response(fd)
   char call_date[5];
   char call_time[5];
   char *dateptr;
+  //Shorten phone number
+  char *nameStr, *nmbrStr, *nmbrStrEnd;
+  int nameStrLength, nmbrStrLength, bufferlen;
 
   // Get a string of characters from the modem
   while(1)
@@ -389,23 +442,109 @@ int wait_for_response(fd)
     inBlockedReadCall = TRUE;
     nbytes = read( fd, buffer, 250 );
     inBlockedReadCall = FALSE;
-
+    
+    //Terminate CID string
+    buffer[nbytes] = 0;
+    
+// Fix Caller ID; Shorten or lengthen phone numbers to 11 digits and replace single char name with "UNKNOWN NAME"
+    if( ( nameStr = strstr( buffer, "NAME = " ) ) != NULL )
+    {
+    // Find the start of the "NMBR = " string.
+      if( ( nmbrStr = strstr( buffer, "NMBR = " ) ) != NULL )
+      {
+        nmbrStrEnd = nameStr - 2;
+    // Find the start of the NMBR string field.
+        nmbrStr += strlen( "NMBR = " );
+    // Find the length of the NMBR string field.
+        nmbrStrLength = (int)(nmbrStrEnd - nmbrStr);
+    // Alpha chars in number - change to zeros
+        i = (int)(nmbrStr-buffer);
+        for (j= i; j< i+nmbrStrLength; j++)
+        {
+          if (isalpha(buffer[j])) {buffer[j] = '0';}
+        }
+    // End Alpha char scan
+        nmbrStrLength = nmbrStrLength - 11;
+    // Number is greater than 11 digits
+        if (nmbrStrLength > 0)
+        {
+          bufferlen = strlen( buffer);
+          nbytes -= nmbrStrLength;
+          // +11 drop last digits, +0 drop first digits
+          for (i=(int)(nmbrStr-buffer); i< bufferlen; i++)
+          {
+            buffer[i]=buffer[i+nmbrStrLength];
+          }
+        }
+    // No Number or Number is less than 11 digits in length
+        if (nmbrStrLength < 0)
+        {
+        nmbrStrLength = nmbrStrLength + 11;
+        i = (int)(nmbrStr-buffer);
+        i += nmbrStrLength;  
+        bufferlen = strlen(buffer);
+        for (j= 0; j< i; j++)
+        {
+          buffer2[j]=buffer[j];
+        }
+        k=j; 
+       for (i=0; i< (11-nmbrStrLength); i++)
+       {
+        buffer2[j] = '0';
+        j++;
+       }
+       for (k; k< bufferlen; k++)
+       {
+        buffer2[j]=buffer[k];
+        j++;
+       }
+        buffer2[j] = 0;
+        nbytes += (11-nmbrStrLength);
+        strcpy (buffer, buffer2);
+        }
+      }
+      //printf("%s",buffer);
+    // Single Character Name (UNKNOWN NAME)
+      nameStr = strstr( buffer, "NAME = " );
+      nameStr += strlen( "NAME = " );
+    // Find the length of the NAME string field (subtract 3 for the
+    // "--\n" at  its end).
+      nameStrLength = strlen( nameStr ) - 3;
+      //printf("%i * %i\n",nameStrLength,i);
+      if (nameStrLength == 0)
+      {
+        i = (int)(nameStr-buffer);
+        for (j = 0; j < 11; j++)
+        {
+          buffer[i+j+11] = buffer[i+j];
+          buffer[i+j] = unknname[j];
+        }
+        buffer[i+j] = unknname[j];
+        nbytes += j;
+      }
+    }
+// end Fix Caller ID 
+    
     // Occasionally a call comes in that has a caller ID
     // field that is too long! Example:
     //     V4231749020000150314
     // Truncate it to the standard length (15 chars):
     //     V42317490200001
-    if( nbytes > 71 )
+    if( nbytes > 72 )
     {
-      nbytes = 71;
-      buffer[69] = '\r';
-      buffer[70] = '\n';
-      buffer[71] = 0;
+      nbytes = 72;
+      buffer[70] = '\r';
+      buffer[71] = '\n';
+      buffer[72] = 0;
     }
 
-    // Replace '\n' and '\r' characters with '-' characters
+    // Replace '\n' and '\r' characters with '-' characters and '-' characters with spaces
     for( i = 0; i < nbytes; i++ )
     {
+       if( buffer[i] == '-' )
+          {
+            buffer[i] = ' ';
+          }
        if( ( buffer[i] == '\n' ) || ( buffer[i] == '\r' ) )
        {
          buffer[i] = '-';
@@ -589,7 +728,7 @@ int wait_for_response(fd)
         printf("time() failed(1)\n");
         continue;
       }
-      if( (nameptr = strstr( buffer2, "NAME = " ) ) == NULL )
+      if( (nameptr = strstr( buffer2, "NAME = " ) ) == NULL)
       {
         strcpy (buffer,"UNKNOWN CALLER");
         i = 14;
@@ -601,14 +740,16 @@ int wait_for_response(fd)
         } 
       }
       buffer[i] = 0;
+    //if (strcmp (buffer, "O") == 0) {strcpy (buffer,"UNKNOWN NAME");} // Single "O" = UNKNOWN NAME
       
       printf ("%s is unclassified.\nDial * to blacklist. %s %s\n\n",buffer, call_date, call_time);
+      //strcpy (uc_name, "unclassified caller, ");
+      strcat (buffer, " and is an unclassified call.");
       write_callerinfo (buffer);
       // Reinitialize the serial port for polling
       close(fd);
       usleep( 250000 );         // quarter second
       open_port( OPEN_PORT_POLLED );
-
       // Now poll until 'RING' strings stop arriving.
       // Note: seven seconds is just longer than the
       // inter-ring time (six seconds).
@@ -630,7 +771,7 @@ int wait_for_response(fd)
       usleep( 250000 );         // quarter second
       open_port( OPEN_PORT_BLOCKED );
       usleep( 250000 );         // quarter second
-
+      //printf("\n%i\n",numRings);
 #ifdef ANS_MACHINE
       // If the call is answered before four rings, block for a
       // touchtone star (*) key press. Note that if an answering
@@ -750,16 +891,16 @@ int wait_for_response(fd)
         // Send on/off/on hook commands to terminate call
         // and send some "clicks" to the listener to indicate
         // that the *-key window has closed.
-        usleep( 250000 );                 // quarter second
-        send_modem_command(fd, "ATH0\r"); // on hook
-        usleep( 250000 );                 // quarter second
+ //       usleep( 250000 );                 // quarter second
+ //       send_modem_command(fd, "ATH0\r"); // on hook
+ //       usleep( 250000 );                 // quarter second
 	// Note: the off/on hook commands were removed to
 	// solve the "off-hook-hang" bug (hopefully!)
 	// (January 10, 2016, W. S. Heath).
       }
     }   // end of *-key check
 #ifdef ANS_MACHINE
-    if (numRings == 4) {
+    if (numRings >= 4) {
         tag_and_write_callerID_record( buffer2, 'M'); //Machine got it, mark M for missed
         init_modem( fd );
     }
@@ -843,9 +984,11 @@ static bool check_whitelist( char *callstr )
   char whitebuf[100];
   char whitebufsave[100];
   char *whitebufptr;
+  char wl_name[100];
   char call_date[10];
   char *dateptr;
   char *strptr;
+  int len;
   long file_pos_last, file_pos_next;
 
   // Close and re-open the whitelist.dat file. Note: this
@@ -954,6 +1097,21 @@ static bool check_whitelist( char *callstr )
 
       // Update the date in the whitebufsave record
       strncpy( &whitebufsave[19], call_date, 6 );
+      
+      // Get the Whitelist entry caller name
+      len = strlen(whitebufsave)-25;
+      strncpy (wl_name, &whitebufsave[25], len);
+      
+      if( (strtok(wl_name, "*" ) ) == NULL ) // asterisk terminates WL name string
+        {
+        printf("wl_name strtok() failed\n");
+        return(TRUE);         // accept the call
+        }
+      
+      //printf("*%s*%i\n",wl_name, len);
+      //printf("%s\n",strtrim(wl_name));
+      
+      write_callerinfo (strtrim(wl_name));
 
       // Write the record back to the whitelist.dat file
       fseek( fpWh, file_pos_last, SEEK_SET );
@@ -989,20 +1147,27 @@ static bool check_internet( char *callstr )
   char filebuf[100]; 
   char *strptr;
   bool state = FALSE;
+  int i;
   
   //Build 800notes query string
   if( (strptr = strstr( callstr, "NMBR = " ) ) != NULL )
       {
-        strcpy(search_buf,"curl -f -s -H \'Accept:text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8\' -H \'User-Agent:Mozilla/5.0 (X11; Linux i686) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/53.0.2785.92 Safari/537.36\' http://800notes.com/Phone.aspx/1-");
-        callptr=strndup(strptr+7,3);
+        i=7;
+        strcpy(search_buf,"curl -s -L -H \'Accept:text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8\' -H \'User-Agent:Mozilla/5.0 (X11; Linux i686) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/53.0.2785.92 Safari/537.36\' https://800notes.com/Phone.aspx/");
+        // try to make sense of nonsensical numbers, prefix a '1' and shift right, dropping last digit
+        if (strptr[i] == '1') {i++;}
+        strcat(search_buf,"1");
+        strcat(search_buf,"-");
+        callptr=strndup(strptr+i,3);
         strcat(search_buf,callptr);
         strcat(search_buf,"-");
-        callptr=strndup(strptr+10,3);
+        callptr=strndup(strptr+(i+3),3);
         strcat(search_buf,callptr);
         strcat(search_buf,"-");
-        callptr=strndup(strptr+13,4);
+        callptr=strndup(strptr+(i+6),4);
         strcat(search_buf,callptr);
         strcat(search_buf, " -o 800notes.txt");
+        //printf("%s\n",search_buf);
 //        system ("curl -s -f http://800notes.com/Phone.aspx/1-818-555-1212 -o 800notes.txt");
         if (system (search_buf) == 0) {
           if( (fpWeb = fopen( "./800notes.txt", "r+" ) ) == NULL )
@@ -1014,7 +1179,7 @@ static bool check_internet( char *callstr )
             while( fgets( filebuf, sizeof( filebuf ), fpWeb ) != NULL )
               {
                 strcat(search_buf,filebuf); // current line
-                if (strstr(search_buf, "Read below") != NULL)
+                if (strstr(search_buf, "Read comments below") != NULL)
                   {
                   //printf ("%s*\n\n%s\n",filebuf,search_buf );
                   state = TRUE;
@@ -1183,7 +1348,7 @@ static bool check_blacklist( char *callstr )
         call_time[4] = dateptr[10];
       }
       call_time[5] = 0;
-      
+      //if (strcmp (blackbuf, "O") == 0) {strcpy (blackbuf,"UNKNOWN NAME");} // Single "O" = UNKNOWN NAME
       printf ("%s is blacklisted.\nTerminating. %s %s\n\n",blackbuf,call_date, call_time);
       sleep(1);
 

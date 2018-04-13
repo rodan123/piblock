@@ -1,4 +1,4 @@
 # Run this script to compile jcblock. First make it executable
 # with: chmod +x makejcblock
 # Then run it with: ./makejcblock
-gcc -pthread -o piblock -lcurses piblock.c truncate.c
+gcc -pthread -o piblock -lcurses -lasound piblock.c truncate.c

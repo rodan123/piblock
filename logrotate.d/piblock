@@ -1,9 +1,22 @@
 /home/pi/piblock/callerID.dat { 
         monthly
+	prerotate
+        python /home/pi/dbpiblock/getcall.py 2 html > /home/pi/dbpiblock/cidreport.log
+	mail -a 'Content-Type: text/html' -s "Monthly Call Report" charlie.d.johnston@gmail.com < /home/pi/dbpiblock/cidreport.log
+	endscript
 	nocompress
         rotate 12
         missingok
 	dateext
 	dateformat .%m
 	dateyesterday
+	create
+	postrotate
+	d=`date +%m` 
+        if [ -e "/home/pi/piblock/callerID.dat.$d" ]
+        then
+                rm /home/pi/piblock/callerID.dat.$d
+        fi
+        /usr/local/bin/freemem > /dev/null 2>&1
+        endscript
 }

@@ -80,7 +80,7 @@ class callerid(Base):
     __tablename__ = 'callerid'
 
     timestamp = Column(TIMESTAMP, primary_key=True )
-    number = Column(String(10))
+    number = Column(String(11))
     name = Column(String(15))
     code = Column(String(1))
 
@@ -144,7 +144,7 @@ def readCallLog():
 
         try:
             #Create new callerid with this information
-            aCall = callerid(thedate,match.group(7),match.group(8),match.group(1))
+            aCall = callerid(thedate,match.group(7)[-10:],match.group(8),match.group(1))
             #merge it into the database and commit
             session.merge(aCall)
             session.commit()

@@ -279,7 +279,8 @@
 
     function SetPhoneNumberSearchLink(div, number) {
         var link = document.createElement('a');
-        link.setAttribute('href', 'http://www.google.com/search?q=' + encodeURIComponent(number));
+        //link.setAttribute('href', 'http://www.google.com/search?q=' + encodeURIComponent(number));
+        link.setAttribute('href', 'https://800notes.com/Phone.aspx/' + encodeURIComponent(number));
         link.setAttribute('target', '_blank');
         link.appendChild(document.createTextNode(number));
 
