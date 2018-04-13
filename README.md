@@ -70,4 +70,4 @@ I run piblock on a raspberrypi3 using an dedicated iphone4, running the Reflecti
 
 04/13/18
 
-17) New branch that contains modifications to work with VOIP callerID. VOIP displays an 11 digit number vs the POTS 10 numbers. Many other minor changes to improve functionality. Whitelist entries announced by IBM Bluemix using the data from the entries comment field if terminated withe an asterisk.
+17) New branch that contains modifications to work with VOIP callerID. VOIP displays an 11 digit number vs the POTS 10 numbers. Many other minor changes to improve functionality. Whitelist entries announced by IBM Bluemix using the data from the entry's comment field if terminated with an asterisk.
